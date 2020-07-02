@@ -1,0 +1,13 @@
+---
+- name: S3E3 Playbook
+  hosts: cpes
+  tasks:
+  - name: "== S3E3.Cisco Task 1: Issue IOS Command Show Version =="
+    ios_commands:
+      commands:
+        - show ver
+    register: cli_result
+
+  - name: "== S3E3.Cisco Task 2: Diplay show ver output to screen =="  
+    debug:
+      var: cli_result.stdout[0]

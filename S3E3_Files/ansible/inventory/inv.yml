@@ -1,0 +1,26 @@
+---
+# Example Inventory File based on YML
+cpes:
+  hosts:
+    watcpe01:
+    watcpe02:
+
+firewalls:
+  hosts:
+    watsrx01:
+
+switches:
+  hosts:
+    watswt01:
+
+zabbix:
+  hosts:
+    watrpi01:
+
+hosts:
+  watcpe01:
+  watcpe02:
+  watsrx01:
+  watswt01:
+  watrpi01:
+
