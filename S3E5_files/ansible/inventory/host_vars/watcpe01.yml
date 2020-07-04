@@ -1,13 +1,6 @@
 ---
 ansible_host: 100.61.0.101
-ansible_connection: network_cli
-ansible_network_os: ios
-ansible_user: sysadmin-jb
-ansible_password: cisco123
-ansible_become: yes
-ansible_become_method: enable
-ansible_become_pass: cisco123
-## Interface details ##
+## Interface Details ##
 interfaces:
   - name: gig0/1/0
     description: WAN 1 - Telstra Fibre Y0012345

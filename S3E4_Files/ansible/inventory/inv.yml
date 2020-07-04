@@ -1,6 +1,5 @@
 ---
 # Example Inventory File based on YML
-# S3E3
 cpes:
   hosts:
     watcpe01:

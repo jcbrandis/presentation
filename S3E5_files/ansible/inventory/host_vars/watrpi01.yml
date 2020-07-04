@@ -1,0 +1,11 @@
+---
+nicname: rpi2
+domain_suffix: automatico.lab
+ansible_host: 100.61.0.104
+#
+os_friendly: debian
+#
+role: production
+#
+app: zabbix
+##
