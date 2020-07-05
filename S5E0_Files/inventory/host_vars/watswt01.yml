@@ -1,0 +1,15 @@
+---
+ansible_host: 100.61.0.106
+#
+
+############ Layer2 vlan Declaration ####################
+vlans:
+  - vlan_id: 1000
+    name: vlan-1000
+    state: present
+  - vlan_id: 2000
+    name: vlan-2000
+    state: present
+  - vlan_id: 3000
+    name: vlan-3000
+    state: present
