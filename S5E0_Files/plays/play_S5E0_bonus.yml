@@ -1,0 +1,33 @@
+---
+- name: "==== S5 Intro Bonus Playbook Alpha ====="
+  hosts: cpes
+  tasks:
+  - name: "== S5E0 Bonus Task 1: Get IOS facts store output to local register ios_facts_result =="
+    register: ios_facts_result
+    ios_facts:
+      gather_subset: 
+        - min
+        - '!default'
+        - '!hardware'
+      gather_network_resources: interfaces
+
+  - name: "== S5E0 Bonus Task 2: Copy contents of junos_facts_result to local file through nice JSON filter =="
+    copy:
+      content: "{{ ios_facts_result | to_nice_json }}"
+      dest: "outputs/{{ inventory_hostname}}_S5E0_outputs.json"
+      ## Copy is a module, which uses the above arguments, taking content to a destination file, it will make and/or oevrwrite##
+
+####### Starting the next element, calling new hosts ############
+
+- name: "==== S5 Intro Bonus Playbook Bravo ====="
+  hosts: srxs
+  tasks:
+  - name: " S5 Intro Task 3: Use te Junos Facts Module"
+    register: junos_facts_result
+    junos_facts: 
+
+  - name: "== S5E0 Bonus Task 4: Copy contents of junos_facts_result to local file through nice JSON filter =="
+    copy:
+      content: "{{ junos_facts_result | to_nice_json }}"
+      dest: "outputs/{{ inventory_hostname}}_S5E0_outputs.json"
+      ## Copy is a module, which uses the above arguments, taking content to a destination file, it will make and/or oevrwrite##
