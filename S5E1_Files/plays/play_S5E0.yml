@@ -1,0 +1,13 @@
+---
+- name: S5 Intro To A Play
+  hosts: cpes
+  gather_facts: no
+  tasks:
+  - name: "== S5 Intro Task 1: Use the IOS Facts Module Inventory WATCPExx =="
+    ios_facts:
+
+- name: "== S5 Intro Task 2: Use the JunOS Facts Module Inventory WATSRX01 =="
+  hosts: watsrx01
+  tasks:
+  - name: "== S5 Intro Task 2: Use the junos_facts Facts Module Single Host watsrx01 =="
+    junos_facts:

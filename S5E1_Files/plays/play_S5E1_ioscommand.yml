@@ -1,0 +1,33 @@
+---
+- name: "=== S5E1 IOS Commands Episode , Playbook #1 ==="
+  hosts: cpes
+  gather_facts: no
+  tasks:
+  - name: " ==== Task 1: Issue multiple ios commands via a list, store the output as cli_result ===== "
+    ios_command:
+      commands:
+        - show ver
+        - show ip int brief
+    register: cli_result_ouput
+#
+#   In the above, we place the output of the two commands into one container called cli_result_output
+#   We can extract the contents from this by referencing it "cli_result_output"
+#  
+  - name: " === Task 2: Write to screen the first element in cli_result_ouput | show ver === "
+    debug:
+      msg: "{{ cli_result_ouput.stdout[0] }}"
+
+  - name: " === Task 3: Write to screen the second element in cli_result_ouput | show ip int brief === "
+    debug:
+      msg: "{{ cli_result_ouput.stdout[1] }}"
+#
+#  The following is the same, however we leverage std out seperated by lines as it is support
+#  you will notice a huge differece in the output. 
+#
+  - name: " === Task 4: Write to screen the first element in cli_result_ouput using stdout lines === "
+    debug:
+      msg: "{{ cli_result_ouput.stdout_lines[0] }}"
+
+  - name: " === Task 5: Write to screen the second element in cli_result_ouput using stdout lines === "
+    debug:
+      msg: "{{ cli_result_ouput.stdout_lines[1] }}"
