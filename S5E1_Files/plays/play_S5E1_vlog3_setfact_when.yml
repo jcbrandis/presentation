@@ -1,0 +1,24 @@
+---
+- name: "=== S5E1 IOS Commands | Vlog #3 | Free Interface Count Play Cisco Switches ==="
+  hosts: cpes
+  gather_facts: no
+  tasks:
+  - name: "=== task 1 - Issue ios commands show interface status save as cli_result_output ==="
+    ios_command:
+      commands:
+        - show int status | include not
+    register: cli_result_output
+
+  - set_fact:
+      count: "{{cli_result_output.stdout_lines[0] | length }}" 
+##      
+##  we set a fact as its easier to work with through a filter or function, of which
+##  length counts the number of elements in the array/list (see next)
+##
+  - debug:
+      msg: "Node {{ ansible_host }} , Free Interfaces {{ count }}"
+    when: count|int >= 4
+##
+##  We leverage the when command, so this takes effect only when the above is true
+##  otherwise we see a "skipping" . For the lab, had to low threshold to 4, but in prod was 24
+##
