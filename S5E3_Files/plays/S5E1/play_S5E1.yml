@@ -1,0 +1,29 @@
+---
+- name: "=== S5E1 IOS Commands ==="
+  hosts: cpes
+  gather_facts: no
+  tasks:
+  - name: "=== task 1 - Issue ios commands via a list ==="
+    ios_command:
+      commands:
+        - show version
+        - show ip int brief
+    register: cli_result_output
+
+  - name: "=== task 2 - write show ver from cli_result_output === "
+    debug:
+      msg: "{{ cli_result_output.stdout[0] }}"
+
+  - name: "=== task 3 - write show ip int from cli_result_output === "
+    debug:
+      msg: "{{ cli_result_output.stdout[1] }}"
+
+#
+#
+  - name: "=== task 4 - show ver STD OUT LINES EXAMPLES === "
+    debug:
+      msg: "{{ cli_result_output.stdout_lines[0] }}"
+
+  - name: "=== task 5 - show ip int STD OUT LINES EXAMPLES === "
+    debug:
+      msg: "{{ cli_result_output.stdout_lines[1] }}"

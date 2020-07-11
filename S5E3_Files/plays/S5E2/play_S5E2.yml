@@ -1,26 +1,23 @@
 ---
-- name: S2 Ansible for backups conditional playbook
+- name: 5E2 Ansible for Backups - Conditional Playbook
   gather_facts: no
   hosts: all
   connection: network_cli
   tasks:
-  - name: "=== Task 1: Backup cisco via ios_config module, backup ==="
-    when: "'cpes' in group_name"
+  - name: "=== Task 1: Backup Cisco Device via ios_config module, backup option ==="
+    when: "'cpes' in group_names"
     ios_config:
       backup: yes
       backup_options:
         dir_path: "outputs/"
-
 #
 #
-  - name: "=== Task 2: Backup juniper via junos_config module, backup"
-    when: "'srxs' in group_name"
+  - name: "=== Task 2: Backup Juniper Device via juniper_config module, backup option ==="
+    when: "'srxs' in group_names"
     junos_config:
       backup: yes
       backup_options:
         dir_path: "outputs/"
-
-
 #####
 #####
 #

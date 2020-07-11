@@ -1,0 +1,37 @@
+---
+- name: ++++ S5E2 Part 3 of 3 Ansible -- Interface Looping + Parents ++++++
+  gather_facts: no
+  hosts: cpes
+  connection: network_cli
+  tasks:
+  - name: " === Task 1: Configure Layer 2 vlans === "
+    ios_config:
+      lines: 
+        - name {{ item.name }}
+        - state active
+      parents: 
+        - vlan {{ item.vlan_id }}
+    with_items: "{{ l2_vlans }}"
+#
+#
+  - name: " === Task 2: Configure Layer 3 Interfaces aka: SVI's/Vlan Interfaces  === "
+    ios_config:
+      lines: 
+        - description {{ item.description }}
+        - ip address {{ item.address }} {{ item.mask_long}}
+        - no shut
+      parents: 
+        - interface {{ item.interface }}
+    with_items: "{{ l3_interfaces }}"
+#
+#
+  - name: " === Task 3: Assign Physical interfaces to a vlan provide description === "
+    ios_config:
+      lines: 
+        - description removed
+        - switchport mode access 
+        - switchport access vlan {{ item.vlan_assignment }}
+        - no shut
+      parents: 
+        - interface {{ item.interface }}
+    with_items: "{{ l2_interfaces }}"
