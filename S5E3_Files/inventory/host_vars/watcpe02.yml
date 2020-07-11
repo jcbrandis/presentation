@@ -25,14 +25,14 @@ l2_vlans:
 l3_interfaces:
 
   - interface: vlan 101
-    description: WAN 1 - Telstra Fibre Y0012345
-    address: 192.168.1.101
+    description: WAN 1 - Telstra Fibre Y0098765
+    address: 192.168.1.102
     mask_long: 255.255.255.0
     mask_short: 24
 
   - interface: vlan 102
-    description: WAN 2 - AAPT 511111
-    address: 192.168.2.101
+    description: WAN 2 - AAPT 5222222
+    address: 192.168.2.102
     mask_long: 255.255.255.0
     mask_short: 24
 ##
