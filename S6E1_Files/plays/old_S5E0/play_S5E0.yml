@@ -1,0 +1,13 @@
+---
+- name: S5 Intro to our first play
+  hosts: cpes
+  gather_facts: no
+  tasks:
+  - name: "== S5 Intro Task 1: Use the IOS facts Module"
+    ios_facts:
+
+- name: " == S5 Intro task 2: Use the Junos Facts Module"
+  hosts: watsrx01
+  tasks:
+  - name: " S5 Intro Task 2: Use te Junos Facts Module"
+    junos_facts: 

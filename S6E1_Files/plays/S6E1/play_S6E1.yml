@@ -1,0 +1,15 @@
+---
+- name: "S6E1 Playbook - Build Config Snippets with Jinja 2"
+  hosts: cpes
+  gather_facts: no
+  connection: local
+  tasks:
+    - name: '=== Task: 1 - Build BGP Config from Jinja2 and host var specifics ==='
+      template:
+        src: "/home/jbrandis/ansible/templates/s6e1_bgp_template.j2"
+        dest: "/home/jbrandis/ansible/outputs/{{ inventory_hostname }}.bgp"
+      delegate_to: localhost
+
+
+
+      

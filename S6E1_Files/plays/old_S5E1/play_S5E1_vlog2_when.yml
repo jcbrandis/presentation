@@ -1,0 +1,14 @@
+---
+- name: "== S51 Vlog 2 IOS Commands | Show Ver When Clause =="
+  hosts: cpes
+  gather_facts: no
+  tasks:
+  - name: "== task 1 - Issue a ios command - show running config save as cli_result_output =="
+    ios_command:
+      commands:
+        - show run 
+    register: cli_result_output
+
+  - debug:
+      msg: "This argument is true - found hostname rtr1111 in the cli_result_output"
+    when: "'rtr1111' in cli_result_output.stdout[0]"

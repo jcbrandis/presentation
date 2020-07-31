@@ -1,0 +1,15 @@
+---
+- name: S3E3 Playbook
+  hosts: firewalls
+  gather_facts: no
+  tasks:
+  - name: "== S3E3 Task 1: Issue Junos Command =="
+    junos_command:
+      commands:
+        - show version
+    register: cli_result
+
+  - name: "== S3E3 Task 2: Diplay output to screen =="  
+    debug:
+      var: cli_result.stdout[0]
+
