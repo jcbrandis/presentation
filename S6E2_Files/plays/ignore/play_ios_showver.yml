@@ -1,0 +1,8 @@
+---
+- hosts: cpes
+  gather_facts: no
+  tasks:
+    - name: S3E3 Cisco Task 1cIssue IOS Command Show Version ==
+      ios_commands:
+        commands:
+          - show ver

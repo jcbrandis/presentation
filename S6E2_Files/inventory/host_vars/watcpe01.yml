@@ -1,0 +1,77 @@
+---
+ansible_host: 100.61.0.101
+## Interface Details ##
+nickname: watcpe01
+###########
+## - Define the BGP Routing Specifics to Peers/Providers 
+##
+bgp_peers:
+  - peer: Telstra
+    description: Telstra Raspberry Pi BGP Peer noc at telstra.fake
+    peer_ip: 192.168.1.254
+    peer_as: 65001
+    bgp_type: external 
+    local_ip: 192.168.1.101
+    local_int: vlan 101
+    local_as: 65011
+  - peer: Vocus
+    description: Vocus Raspberry Pi BGP Peer noc at vocus.fake
+    peer_ip: 192.168.2.254
+    peer_as: 65002
+    bgp_type: external 
+    local_ip: 192.168.2.102
+    local_int: vlan 102
+    local_as: 65011
+
+###########
+## - Define the virtual interfaces, svi's, to be applied to watcpe01 due to limitation on device - 
+##
+l2_vlans:
+  - vlan_id: 101
+    name: vlan101
+    state: present
+  - vlan_id: 102
+    name: vlan102
+    state: present
+  - vlan_id: 103
+    name: vlan103
+    state: present
+##
+##
+###########
+###########
+## - Build the Layer 3 vlan interface, aka: int vlan101 with relevant IP and descriptions
+## 
+l3_interfaces:
+
+  - interface: vlan 101
+    description: WAN 1 - Telstra Fibre Y0012345
+    address: 192.168.1.101
+    mask_long: 255.255.255.0
+    mask_short: 24
+
+  - interface: vlan 102
+    description: WAN 2 - AAPT 511111
+    address: 192.168.2.101
+    mask_long: 255.255.255.0
+    mask_short: 24
+##
+##
+###########
+###########
+## - Assign the physical interfaces to a a vlan, apply a description , this is because cant apply IP to int direct
+## 
+l2_interfaces:
+
+  - interface: gig0/1/0
+    mode: access
+    vlan_assignment: 101
+    description: Access Vlan 101 LAB WAN 1 Telstra - Connected watswt01 port 12
+
+  - interface: gig0/1/1
+    mode: access
+    vlan_assignment: 102
+    description: Access Vlan 102 LAB WAN 2 AAPT - Connected watswt01 port 13
+##
+##
+###########

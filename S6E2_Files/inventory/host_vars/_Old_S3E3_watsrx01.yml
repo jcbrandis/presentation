@@ -1,0 +1,22 @@
+---
+ansible_host: 100.61.0.103
+ansible_connection: netconf
+ansible_network_os: junos
+ansible_user: sysadmin-jb
+ansible_password: cisco123
+ansible_port: 830
+## Firewall Interface Details ##
+interfaces:
+  - name: fe-0/0/7.0
+    description: Outside - Vocus VIE123456
+    address: 192.168.1.107
+    mask_long: 255.255.255.0
+    mask_short: 24
+    zone: outside
+
+  - name: fe-0/0/6.0
+    description: DMZ
+    address: 10.168.1.107
+    mask_long: 255.255.255.0
+    mask_short: 24
+    zone: dmz

@@ -1,0 +1,16 @@
+---
+- name: "=== S5E1 IOS Commands| Vlog #3 | Free INterface Count Play ==="
+  hosts: cpes
+  gather_facts: no
+  tasks:
+  - name: "=== task 1 - Issue ios commands show interface status save as cli_result_output ==="
+    ios_command:
+      commands:
+        - show int status | include not 
+    register: cli_result_output
+
+  - set_fact:
+      count: "{{ cli_result_output.stdout_lines[0] | length }}" 
+
+  - debug:
+      msg: "Node {{ ansible_host }} , Free Interfaces {{ count }}"

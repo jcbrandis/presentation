@@ -1,0 +1,45 @@
+---
+- name: S5E2 Ansible for Backup - Conditional Playbook
+  gather_facts: no
+  hosts: all
+  connection: network_cli
+  tasks:
+  - name: "=== Task 1: Backup Cisco Device via ios_config module, backup option ==="
+    when: "'cpes' in group_names"
+    ios_config:
+      backup: yes
+      backup_options:
+        dir_path: "outputs/"
+#
+  - name: "=== Task 2: Backup Juniper Device via junos_config module, backup option ==="
+    when: "'srxs' in group_names"
+    junos_config:
+      backup: yes
+      backup_options:
+        dir_path: "outputs/"
+
+
+#####
+#####
+#
+#   below is for my mate Russ in Parramatta, managing a fleet of Extreme Switches running Extreme NOS, same logic
+#
+# - name: "=== Task XYZ: Backup Extreme NOS Device via nos_config module, backup option ==="
+#   when: "'extreme_switches' in group_names"
+#   nos_config:
+#     backup: yes
+#     backup_options:
+#       dir_path: "outputs/"
+#   
+#
+#   below is for my mate Andrew in WA, managing a fleet of Brocade based Switches running Ironware NOS, same logic
+#
+# - name: "=== Task XYZ: Backup Ironware OS Device via ironware_config module, backup option ==="
+#   when: "'ironware_switches' in group_names"
+#   ironware_config:
+#     backup: yes
+#     backup_options:
+#       dir_path: "outputs/"
+#
+#####
+#####  

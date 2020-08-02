@@ -1,0 +1,15 @@
+---
+- name: "== S6E2 Playbook - Build file with Jinja deploy with ios_config =="
+  hosts: cpes
+  gather_facts: no
+  connection: local
+  tasks:
+    - name: "=== Task 1: - Build BGP COnfig output to local file ==="
+      template:
+        src: "/home/jbrandis/ansible/templates/s6e2_bgp_template.j2"
+        dest: "/home/jbrandis/ansible/outputs/{{ inventory_hostname }}.bgp"
+      delegate_to: localhost
+
+    - name: "=== Task 2: Deploy BGP Config Snippets to CPE's from Source File ==="
+      ios_config:
+        src: "/home/jbrandis/ansible/outputs/{{ inventory_hostname }}.bgp"

@@ -1,0 +1,10 @@
+---
+- name: S5E2 Part 2 of 3 Ansible to Change hostname
+  gather_facts: no
+  hosts: cpes
+  connection: network_cli
+  tasks:
+  - name: " === Task 1: Change hostname using ios_config lines === "
+    ios_config:
+      lines:
+        - hostname {{ nickname }}

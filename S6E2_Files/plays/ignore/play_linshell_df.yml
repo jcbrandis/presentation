@@ -1,0 +1,10 @@
+---
+- hosts: watrpi01
+  tasks:
+    - name: check disk usage
+      shell: df > df_temp2.txt
+      register: cli_result
+
+    - name: "== S3E3.Junos Task 2: Diplay output to screen =="  
+      debug:
+        var: cli_result.stdout[0]

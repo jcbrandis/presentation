@@ -1,0 +1,15 @@
+---
+- name: "=== Bonus: Get Dem Facts ==="
+  hosts: cpes
+  tasks:
+  - name: " ==== IOS Facts Module Demo, Gather Facts ===== "
+    ios_facts:
+    ## recall, ios_facts is a module that will obtain extensive information about the node
+  
+  - name: " == Bonus: Write same facts to the screen per node ==="
+    debug:
+      msg: "The Hostname is {{ ansible_net_hostname }} and the model {{ ansible_net_model }}"
+
+    ## debug is a module, which we can use to send output to the screen #
+    ## ansible_net_xx are the results of gathering facts, refer to website, we are pulling these
+    ## and writing them to the screen for viewing pleasure 

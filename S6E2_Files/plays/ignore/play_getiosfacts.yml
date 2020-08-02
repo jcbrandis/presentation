@@ -1,0 +1,10 @@
+---
+- name: S3E3 Playbook
+  hosts: cpes
+  tasks:
+  - name: "== S3E3 Task 1: Get IOS facts =="
+    ios_facts:
+
+  - name: "== S3E3 Task 2: Display list of facts to screen =="
+    debug:
+      var: ansible_net_config
