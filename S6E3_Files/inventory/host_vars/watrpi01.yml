@@ -1,0 +1,48 @@
+---
+nickname: watrpi01
+# 
+domain_suffix: automatico.lab
+ansible_host: 100.61.0.104
+#
+os_friendly: debian
+#
+role: production
+#
+app: zabbix
+##
+###########
+## - Define the BGP Routing Specifics to Peers/Providers 
+##
+bgp_peers:
+  - peer: watcpe01_telstra
+    description: BGP Session to Mimic Telstra WAN to watcpe01
+    peer_ip: 192.168.1.101
+    peer_as: 65011
+    bgp_type: external 
+    local_ip: 192.168.1.254
+    local_int: eth1
+    local_as: 65001
+  - peer: watcpe02_telstra
+    description: BGP Session to Mimic Telstra WAN to watcpe02
+    peer_ip: 192.168.1.102
+    peer_as: 65022
+    bgp_type: external 
+    local_ip: 192.168.1.254
+    local_int: eth1
+    local_as: 65001
+  - peer: watcpe01_vocus
+    description: BGP Session to Mimic Vocus WAN to watcpe01
+    peer_ip: 192.168.2.101
+    peer_as: 65011
+    bgp_type: external 
+    local_ip: 192.168.2.254
+    local_int: eth2
+    local_as: 65001
+  - peer: watcpe02_vocus
+    description: BGP Session to Mimic Vocus WAN to watcpe02
+    peer_ip: 192.168.2.102
+    peer_as: 65022
+    bgp_type: external 
+    local_ip: 192.168.2.254
+    local_int: eth2
+    local_as: 65001

@@ -1,0 +1,15 @@
+---
+- name: " === S6E3 Playbook - Build a conditional snippet file with jijna2  ==="
+  hosts: cpes
+  gather_facts: no
+  connection: local
+  tasks:
+    - name: "=== task 1: - Build BGP Config Snippet to local file ==="
+      template:
+        src: "/home/jbrandis/ansible/templates/s6e3_bgp_template.j2"
+        dest: "/home/jbrandis/ansible/outputs/{{ inventory_hostname }}.lab3"
+      delegate_to: localhost
+
+#    - name: "=== Task 2: - deploy BGP COnfig Snippet via ios_config ==="
+#      ios_config:
+#        src: "/home/jbrandis/ansible/outputs/{{ inventory_hostname }}.bgp"
