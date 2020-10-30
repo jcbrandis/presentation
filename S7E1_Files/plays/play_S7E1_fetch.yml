@@ -1,0 +1,11 @@
+---
+- name: "S7E1.2: Fetch files on remote machines and drag back to control node/laptop"
+  hosts: linuxs
+  gather_facts: no
+  connection: local
+  become: yes
+  tasks:
+   - name: "=== Play:1 - Fetch file1.txt from my remote home ==="
+     fetch:
+       src: /home/sysadmin-jb/file1.txt
+       dest: ./

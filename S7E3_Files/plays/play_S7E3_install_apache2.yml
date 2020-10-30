@@ -1,0 +1,33 @@
+---
+- name: "S7E3: Installing Packages using Ansible on Linux Targets"
+  hosts: linuxs
+  gather_facts: no
+  connection: local
+  become: yes
+  tasks:
+     name: "=== Task:1 - Install Apache2 Web Server via APT ==="
+     apt:
+       name: "{{ item }}"
+       state: present
+     loop:
+      - apache2
+
+   - name: "=== Task:2 - Enable & Start Apache2 Service ==="
+     service:
+       name: "{{ item }}"
+       state: started
+       enabled: yes
+     loop:
+      - apache2
+
+     name: "=== Task:3 - Copy a unique yet awful unique default html page ==="
+     copy:
+       content: "=== Apache Web Server, Delivering Content from target machine ==> {{ inventory_hostname }} <=="
+       dest: /var/www/html/index.html
+
+   - name: "=== Task:4 - Restart Apache2 service for Ubuntu ==="
+     service:
+       name: "{{ item }}"
+       state: restarted
+     loop:
+      - apache2

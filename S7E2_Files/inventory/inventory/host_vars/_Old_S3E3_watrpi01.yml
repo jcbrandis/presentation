@@ -1,0 +1,17 @@
+---
+nicname: rpi2
+domain_suffix: automatico.lab
+ansible_host: 100.61.0.104
+ansible_port: 22
+ansible_connection: ssh
+ansible_user: sysadmin-jb
+ansible_password: cisco123
+ansible_become: yes
+ansible_become_method: sudo
+ansible_become_pass: cisco123
+os_friendly: debian
+#
+role: production
+#
+app: zabbix
+##

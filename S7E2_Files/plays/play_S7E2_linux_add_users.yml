@@ -1,0 +1,29 @@
+---
+- name: "S7E2: Create Linux users - Add to sudoers"
+  hosts: linuxs
+  gather_facts: no
+  connection: local
+  become: yes
+  vars:
+    MyPasswd: "cisco123"
+  tasks:
+   - name: "=== Play 1: Create Linux Users from a list ==="
+     user:
+       name: "{{ item }}"
+       state: present
+       password: "{{ MyPasswd | password_hash('sha512') }}"
+       shell: /bin/bash
+       update_password: on_create
+     loop:
+       - sysadmin-moonie
+       - sysadmin-harris
+       - sysadmin-boyd
+
+   - name: "=== Play 2: Add Power users to Sudoers ==="
+     become: yes
+     command: usermod -aG sudo {{ item }}
+     loop:
+       - sysadmin-moonie
+       - sysadmin-harris
+       - sysadmin-boyd
+

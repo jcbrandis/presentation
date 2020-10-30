@@ -1,0 +1,11 @@
+---
+- name: "S7E1.2: Cleaning Up Files, deleting files on remote targets"
+  hosts: linuxs
+  gather_facts: no
+  connection: local
+  become: yes
+  tasks:
+   - name: "=== Play:1 - Delete file1.txt on remote targets ==="
+     file:
+       dest: ./home/sysadmin-jb/file1.txt
+       state: absent

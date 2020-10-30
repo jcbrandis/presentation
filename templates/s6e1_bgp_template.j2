@@ -1,0 +1,25 @@
+#####
+##
+##  Jinja2 Template to create some basic BGP Snippets based on host_vars
+##  Season 6 Episode 1 - Jinja 2 for BGP Config Snippets July 2020
+##
+#####
+
+{% for peer in bgp_peers %}
+router bgp {{ peer.local_as }}
+ no synchronization
+ redistribute connected
+ bgp log-neighbor-change
+ neighbor {{ peer.peer_ip }} remote-as {{ peer.peer_as }}
+ neighbor {{ peer.peer_ip }} update-source {{ peer.local_int }}
+ neighbor {{ peer.peer_ip }} description {{ peer.description }}
+ no auto-summary
+
+ address-family ipv4 unicast
+  redistribute connected
+  neighbor {{ peer.peer_ip }} activate
+  neighbor {{ peer.peer_ip }} next-hop-self
+  neighbor {{ peer.peer_ip }} send-community both
+  neighbor {{ peer.peer_ip }} soft-reconfiguration inbound
+  
+{%  endfor %}

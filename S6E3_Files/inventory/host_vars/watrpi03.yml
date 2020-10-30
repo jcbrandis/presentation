@@ -1,0 +1,15 @@
+---
+nickname: watrpi03
+# 
+domain_suffix: automatico.lab
+ansible_host: 100.61.0.116
+#
+os_friendly: debian
+#
+role: production
+#
+app: zabbix
+##
+###########
+## - Define the BGP Routing Specifics to Peers/Providers 
+##
