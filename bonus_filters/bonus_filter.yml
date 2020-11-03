@@ -1,0 +1,46 @@
+---
+- name: "Bonus Session: Experiment using Ansible Filters for Network Automation Folks"
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  become: no
+  vars:
+    vlans:
+      - name: data
+        vlan_id: 10
+      - name: voice
+        vlan_id: 20
+      - name: wifi
+        vlan_id: 30
+      - name: mgmt
+        vlan_id: 40
+    layer3_interfaces: 
+      - subnet: 192.168.1.254/24
+        name: vlan1
+        host_ip: 10
+      - subnet: 192.168.2.254/24
+        name: vlan2
+        host_ip: 20
+      - subnet: 192.168.3.254/24
+        name: vlan3
+        host_ip: 30
+  tasks:
+    - name: " === task 1 - Lets experiment taking structed vlan data and making a list === "
+      debug:
+        msg:
+         - "A Listing of the vlans {{ vlans | map(attribute='vlan_id') | list | join(',') }}"
+
+    - name: " === task 2 - Lets have some fun with basic ip address filters === "
+      debug:
+        msg:
+         - "L3 Network Equals : {{ item.subnet | ipaddr('network') }}"
+         - "L3 Network Netmask : {{ item.subnet | ipaddr('netmask') }}"
+         - "L3 Network Broadcast : {{ item.subnet | ipaddr('broadcast') }}"
+         - "L3 IP Assignment : {{ item.subnet | ipv4(item.host_ip)}}"
+      loop: "{{ layer3_interfaces }}"
+
+    - name: " === task 3 - Splitting the digit after vlan away from vlanX with Filters === "
+      debug:
+        msg:
+         - "Before {{ item.name }} / After / {{ item.name.split('vlan')[1] }}"
+      loop: "{{ layer3_interfaces }}"
