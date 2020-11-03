@@ -9,3 +9,5 @@
 * I am a people manager trying to learn, please be gentle in your comments. 
 * All the very best in learning
 
+All the videos in this series can be found on Youtube
+https://www.youtube.com/channel/UClBSA8XRBhNWgpdvGK4Gemg?
